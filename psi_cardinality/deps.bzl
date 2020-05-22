@@ -20,6 +20,8 @@ load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_
 load("@io_bazel_rules_go//go:deps.bzl", "go_rules_dependencies", "go_register_toolchains")
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@pybind11_bazel//:python_configure.bzl", "python_configure")
+load("@rules_python//python:repositories.bzl", "py_repositories")
 
 def psi_cardinality_deps():
     # Make all files under submodules/emsdk/* visible to the toolchain. The files are
@@ -93,6 +95,10 @@ def psi_cardinality_deps():
                 "https://github.com/gflags/gflags/archive/v2.2.2.tar.gz",
             ],
         )
+
+    py_repositories()
+
+    python_configure(name = "local_config_python")
 
     rules_proto_dependencies()
 

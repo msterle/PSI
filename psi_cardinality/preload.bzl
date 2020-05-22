@@ -61,3 +61,28 @@ def psi_cardinality_preload():
             ],
             sha256 = RULES_PKG_SHA256,
         )
+
+    if "pybind11_bazel" not in native.existing_rules():
+        http_archive(
+            name = "pybind11_bazel",
+            strip_prefix = "pybind11_bazel-py3",
+            urls = ["https://github.com/kerrick-lyft/pybind11_bazel/archive/py3.zip"],
+            sha256 = "7b45a217ad57a50698ff83ca36fce37ebbd17502d429bd1e78bfacb66bab17dc",
+        )
+
+    if "pybind11" not in native.existing_rules():
+        http_archive(
+            name = "pybind11",
+            build_file = "@pybind11_bazel//:pybind11.BUILD",
+            strip_prefix = "pybind11-2.5.0",
+            urls = ["https://github.com/pybind/pybind11/archive/v2.5.0.zip"],
+            sha256 = "1859f121837f6c41b0c6223d617b85a63f2f72132bae3135a2aa290582d61520",
+        )
+
+    if "rules_python" not in native.existing_rules():
+        http_archive(
+            name = "rules_python",
+            url = "https://github.com/bazelbuild/rules_python/archive/a0fbf98d4e3a232144df4d0d80b577c7a693b570.zip",
+            strip_prefix = "rules_python-a0fbf98d4e3a232144df4d0d80b577c7a693b570",
+            sha256 = "98c9b903f6e8fe20b7e56d19c4822c8c49a11b475bd4ec0ca6a564e8bc5d5fa2",
+        )
