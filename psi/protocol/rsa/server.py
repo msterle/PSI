@@ -19,7 +19,7 @@ class Server:
             self.public_key, self.private_key = rsa.keygen(key_size, e)
         else:
             self.public_key, self.private_key = rsa.from_private(
-                self.private_key)
+                private_key)
 
     @property
     def keys(self):
